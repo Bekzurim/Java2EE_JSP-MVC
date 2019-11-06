@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Contrôleur;
+package Modèle;
 
 import java.io.IOException;
 import java.sql.SQLIntegrityConstraintViolationException;
@@ -16,14 +16,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import Modèle.DAO;
 import Modèle.DataSourceFactory;
-import javax.sql.DataSource;
 
 /**
  * Le contrôleur de l'application
  * @author rbastide
  */
 @WebServlet(name = "discountEditor", urlPatterns = {"/discountEditor"})
-public class Controleur extends HttpServlet {
+public class LeTrucQuiFaitToutMarcher extends HttpServlet  {
 
 	/**
 	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -41,7 +40,7 @@ public class Controleur extends HttpServlet {
 		String code = request.getParameter("code");
 		String taux = request.getParameter("taux");
 		try {
-			DAO dao = new DAO((DataSource) DataSourceFactory.getDataSource());
+			DAO dao = new DAO(DataSourceFactory.getDataSource());
 			request.setAttribute("codes", dao.allCodes());			
 			switch (action) {
 				case "ADD": // Requête d'ajout (vient du formulaire de saisie)
@@ -66,7 +65,7 @@ public class Controleur extends HttpServlet {
 
 		}
 		// On continue vers la page JSP sélectionnée
-		request.getRequestDispatcher("ajoutDiscount.jsp").forward(request, response);
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
 	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
